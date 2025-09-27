@@ -10,7 +10,7 @@ const itemSchema = new mongoose.Schema({
 
 const invoiceSchema = new mongoose.Schema(
     {
-        users: {
+        user: {
             type : mongoose.Schema.Types.ObjectId,
             ref : "User",
             required : true
