@@ -140,7 +140,7 @@ const getDashboardSummary = async (req,res) => {
 
         const prompt = `
             You are a friendly and insightful Financial Analyst for a small business owner.
-            Based on the following summary of their invoice data, provide 2-3 concise and actionable insight.
+            Based on the following summary of their invoice data, provide 2-3 small & concise and actionable insight.
             Each insight should be encouraging and helpful.Do not just repeat the data.
 
             For example, if there is a high outstanding amount, suggest sending reminders. If revenue is high, be encouraging.
