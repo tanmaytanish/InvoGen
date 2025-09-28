@@ -1,10 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import HERO_IMG from "../../assets/HERO_IMG.png"
+import { useAuth } from '../../context/AuthContext';
 
 const Hero = () => {
 
-    const isAuthenticated = false;
+    const {isAuthenticated} = useAuth();
 
   return (
     <section className='relative bg-[#fbfbfb] overflow-hidden'>

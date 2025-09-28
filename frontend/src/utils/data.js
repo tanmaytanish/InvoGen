@@ -1,4 +1,4 @@
-import { BarChart2, FileText, Mail, Sparkles } from "lucide-react";
+import { BarChart2, FileText, LayoutDashboard, Mail, Plus, Sparkles, Users } from "lucide-react";
 
 export const FEATURES = [
   {
@@ -62,4 +62,12 @@ export const FAQS = [
     question: "How do I send payment reminders?",
     answer: "You can set up automatic reminders or send them manually through the app."  
   }    
+]
+
+// navigation iytems configuration
+export const NAVIGATION_MENU = [
+  { id : "dashboard", name : "Dashbaord", icon : LayoutDashboard},
+  { id : "invoices", name : "Invoices", icon : FileText},
+  { id : "invoices/new", name : "Create Invoice", icon : Plus},
+  { id : "profile", name : "Profile", icon : Users},
 ]
