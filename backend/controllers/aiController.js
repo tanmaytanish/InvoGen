@@ -84,7 +84,7 @@ const generateReminderEmail = async (req,res) => {
             return res.status(404).json({message : "Invoice Not Found"})
         }
         const prompt = 
-        `You are a professional and polite accounting assistant. Write a friendly reminder emial to a client about an overdue or upcoming invoice payment.
+        `You are a professional and polite accounting assistant. Write a friendly reminder email to a client about an overdue or upcoming invoice payment.
         
         Use the following details to personalize the email:
             - Client Name : ${invoice.billTo.clientName}
