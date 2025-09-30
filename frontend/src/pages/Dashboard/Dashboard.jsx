@@ -204,7 +204,7 @@ const Dashboard = () => {
                     </td>
 
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-500">
-                      {moment(invoice.dueDate).format("DD-MM-YYYY")}
+                      {moment(invoice.dueDate).format("MMM DD,YYYY")}
                     </td>
                   </tr>
                 ))}
