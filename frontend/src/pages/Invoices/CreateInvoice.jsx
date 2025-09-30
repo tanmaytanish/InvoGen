@@ -55,10 +55,16 @@ const CreateInvoice = ({existingInvoice, onSave}) => {
         }
 
         if (existingInvoice) {
+            console.log("existingInvoice at useEffect:", existingInvoice);
+            console.log("existingInvoice.items:", existingInvoice.items);
+
             setFormData({
                 ...existingInvoice,
-                invoiceDate: moment(existingInvoice.invoiceDate).format("DD-MM-YYYY"),
-                dueDate: moment(existingInvoice.dueDate).format("DD-MM-YYYY"),
+                invoiceDate: moment(existingInvoice.invoiceDate).format("YYYY-MM-DD"),
+                dueDate: moment(existingInvoice.dueDate).format("YYYY-MM-DD"),
+                items: existingInvoice.items && existingInvoice.items.length
+                    ? existingInvoice.items
+                    : [{name: "", quantity: 1, unitPrice: 0, taxPercent: 0}],
             });
         } else {
             const generateNewInvoiceNumber = async () => {
@@ -77,40 +83,40 @@ const CreateInvoice = ({existingInvoice, onSave}) => {
                     setFormData((prev) => ({...prev, invoiceNumber: newInvoiceNumber}));
                 } catch (error) {
                     console.error("Failed to generate invoice number", error);
-                    setFormData((prev) => ({...prev, invoiceNumber: `INV-${Date.now().toString().sice(-5)}`}));
+                    setFormData((prev) => ({...prev, invoiceNumber: `INV-${Date.now().toString().slice(-5)}`}));
                 }
                 setIsGeneratingNumber(false);
             };
             generateNewInvoiceNumber();
         }
-    }, [existingInvoice]);
+    }, [existingInvoice, location.state, user]);
 
     const handleInputChange = (e, section, index) => {
-      const {name,value} = e.target;
-      if(section){
-        setFormData((prev)=>({...prev,[section]:{...prev[section],[name] : value}}))
-      }else if(index !== undefined){
-        const newItems = [...formData.items]
-        newItems[index] = {...newItems[index],[name]:value}
-        setFormData((prev)=>({...prev, items: newItems}))
-      }else{
-        setFormData((prev)=>({...prev, [name] : value}))
-      }
+        const {name, value} = e.target;
+        if (section) {
+            setFormData((prev) => ({...prev, [section]: {...prev[section], [name]: value}}));
+        } else if (index !== undefined) {
+            const newItems = [...(formData.items || [])];
+            newItems[index] = {...newItems[index], [name]: value};
+            setFormData((prev) => ({...prev, items: newItems}));
+        } else {
+            setFormData((prev) => ({...prev, [name]: value}));
+        }
     };
 
     const handleAddItem = () => {
-        setFormData({...formData, items: [...formData.items, {name: "", quantity: 1, unitPrice: 0, taxPercent: 0}]});
+        setFormData({...formData, items: [...(formData.items || []), {name: "", quantity: 1, unitPrice: 0, taxPercent: 0}]});
     };
 
     const handleRemoveItem = (index) => {
-      const newItems = formData.items.filter((_, i)=> i !== index)
-      setFormData({...formData,items:newItems})
+        const newItems = (formData.items || []).filter((_, i) => i !== index);
+        setFormData({...formData, items: newItems});
     };
 
     const {subtotal, taxTotal, total} = (() => {
         let subtotal = 0,
             taxTotal = 0;
-        formData.items.forEach((item) => {
+        (formData.items || []).forEach((item) => {
             const itemTotal = (item.quantity || 0) * (item.unitPrice || 0);
             subtotal += itemTotal;
             taxTotal += itemTotal * ((item.taxPercent || 0) / 100);
@@ -119,45 +125,42 @@ const CreateInvoice = ({existingInvoice, onSave}) => {
     })();
 
     const handleSubmit = async (e) => {
-  e.preventDefault();
-  setLoading(true);
+        e.preventDefault();
+        setLoading(true);
 
-  const itemsWithTotal = (formData.items || []).map((item) => ({
-    ...item,
-    total:
-      (item.quantity || 0) *
-      (item.unitPrice || 0) *
-      (1 + (item.taxPercent || 0) / 100),
-  }));
+        const itemsWithTotal = (formData.items || []).map((item) => ({
+            ...item,
+            total:
+                (item.quantity || 0) *
+                (item.unitPrice || 0) *
+                (1 + (item.taxPercent || 0) / 100),
+        }));
 
-  const finalFormData = {
-    ...formData,
-    items: itemsWithTotal,
-    subtotal,
-    taxTotal,
-    total,
-  };
+        const finalFormData = {
+            ...formData,
+            items: itemsWithTotal,
+            subtotal,
+            taxTotal,
+            total,
+        };
 
-  if (onSave) {
-    await onSave(finalFormData);
-  } else {
-    try {
-      await axiosInstance.post(API_PATHS.INVOICE.CREATE, finalFormData);
-      toast.success("Invoice Created Successfully !");
-      navigate("/invoices");
-    } catch (error) {
-      toast.error("Failed to create Invoice");
-      console.error(error);
-    }
-  }
+        if (onSave) {
+            await onSave(finalFormData);
+        } else {
+            try {
+                await axiosInstance.post(API_PATHS.INVOICE.CREATE, finalFormData);
+                toast.success("Invoice Created Successfully !");
+                navigate("/invoices");
+            } catch (error) {
+                toast.error("Failed to create Invoice");
+                console.error(error);
+            }
+        }
 
-  setLoading(false);
-};
-
+        setLoading(false);
+    };
 
     return (
-
-
         <form onSubmit={handleSubmit} className="space-y-8 pb-[100vh]">
             <div className="flex justify-between items-center">
                 <h2 className="text-xl font-semibold text-slate-900">
@@ -262,27 +265,17 @@ const CreateInvoice = ({existingInvoice, onSave}) => {
                     <table className="w-full divide-y divide-slate-200">
                         <thead className="bg-slate-50">
                             <tr>
-                                <th className="px-2 sm:px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">
-                                    Item
-                                </th>
-                                <th className="px-2 sm:px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">
-                                    Quantity
-                                </th>
-                                <th className="px-2 sm:px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">
-                                    Price
-                                </th>
-                                <th className="px-2 sm:px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">
-                                    Tax(%)
-                                </th>
-                                <th className="px-2 sm:px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">
-                                    Total
-                                </th>
+                                <th className="px-2 sm:px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Item</th>
+                                <th className="px-2 sm:px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Quantity</th>
+                                <th className="px-2 sm:px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Price</th>
+                                <th className="px-2 sm:px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Tax(%)</th>
+                                <th className="px-2 sm:px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Total</th>
                                 <th className="px-2 sm:px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider"></th>
                             </tr>
                         </thead>
 
                         <tbody className="bg-white divide-y divide-slate-200">
-                            {formData.items.map((item, index) => (
+                            {(formData.items || []).map((item, index) => (
                                 <tr key={index} className="hover:bg-slate-50">
                                     <td className="px-2 sm:px-6 py-4">
                                         <input
@@ -359,26 +352,30 @@ const CreateInvoice = ({existingInvoice, onSave}) => {
                 <div className="bg-white p-6 rounded-lg shadow-gray-100 border border-slate-200 space-y-4">
                     <h3 className="text-lg font-semibold text-slate-900 mb-2">Notes & Terms</h3>
                     <TextareaField label="Notes" name="notes" value={formData.notes} onChange={handleInputChange} />
-                    <SelectField label="Payment Terms" name="paymentTerms" value={formData.paymentTerms} onChange={handleInputChange}
-                      options={["Net 15", "Net 30","Net 60","Due on Receipt"]}
+                    <SelectField
+                        label="Payment Terms"
+                        name="paymentTerms"
+                        value={formData.paymentTerms}
+                        onChange={handleInputChange}
+                        options={["Net 15", "Net 30", "Net 60", "Due on Receipt"]}
                     />
                 </div>
 
                 <div className="bg-white p-6 rounded-lg shadow-sm shadow-gray-100 border border-slate-200 flex flex-col justify-center">
-                  <div className="space-y-4">
-                    <div className="flex justify-between text-sm text-slate-600">
-                      <p>Subtotal:</p>
-                      <p>${subtotal.toFixed(2)}</p>
+                    <div className="space-y-4">
+                        <div className="flex justify-between text-sm text-slate-600">
+                            <p>Subtotal:</p>
+                            <p>${subtotal.toFixed(2)}</p>
+                        </div>
+                        <div className="flex justify-between text-sm text-slate-600">
+                            <p>Tax:</p>
+                            <p>${taxTotal.toFixed(2)}</p>
+                        </div>
+                        <div className="flex justify-between text-lg font-semibold text-slate-900 border-t border-slate-200 pt-4 mt-4">
+                            <p>Total:</p>
+                            <p>${total.toFixed(2)}</p>
+                        </div>
                     </div>
-                    <div className="flex justify-between text-sm text-slate-600">
-                      <p>Tax:</p>
-                      <p>${taxTotal.toFixed(2)}</p>
-                    </div>
-                    <div className="flex justify-between text-lg font-semibold text-slate-900 border-t border-slate-200 pt-4 mt-4">
-                      <p>Total:</p>
-                      <p>${total.toFixed(2)}</p>
-                    </div>
-                  </div>
                 </div>
             </div>
         </form>
