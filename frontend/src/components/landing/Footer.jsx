@@ -2,15 +2,19 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { Twitter, Github, Linkedin, FileText } from 'lucide-react'
 
+
 const FooterLink = ({href,to,children}) => {
     const className = "block text-gray-400 hover:text-white transition-colors duration-200"
+
 
     if(to){
         return <Link to={to} className={className}>{children}</Link>
     }
 
+
     return <a href={href} className={className}>{children}</a>
 }
+
 
 const SocialLink = ({href, children}) => {
     return (
@@ -20,6 +24,7 @@ const SocialLink = ({href, children}) => {
             rel='noopener noreferrer'>{children}</a>
     )
 }
+
 
 const Footer = () => {
   return (
@@ -38,6 +43,7 @@ const Footer = () => {
                     </p>
                 </div>
 
+
                 <div>
                     <h3 className='text-base font-semibold mb-4'>Product</h3>
                     <ul className='space-y-2'>
@@ -53,6 +59,7 @@ const Footer = () => {
                     </ul>
                 </div>
 
+
                 <div>
                     <h3 className='text-base font-semibold mb-4'>Company</h3>
                     <ul className='space-y-2'>
@@ -60,6 +67,7 @@ const Footer = () => {
                         <li><FooterLink to='/contact'>Contact</FooterLink></li>
                     </ul>
                 </div>
+
 
                 <div>
                     <h3 className='text-base font-semibold mb-4'>Legal</h3>
@@ -74,6 +82,7 @@ const Footer = () => {
                 </div>
             </div>
 
+
             <div className='border-t border-gray-800 py-8 mt-16'>
                 <div className='flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0'>
                     <p className='text-gray-400'>&copy; 2025 InvoGen. All rights reserved.</p>
@@ -81,10 +90,10 @@ const Footer = () => {
                         <SocialLink href="#">
                             <Twitter className='w-5 h-5' />
                         </SocialLink>
-                        <SocialLink href="#">
+                        <SocialLink href="https://github.com/tanmaytanish">
                             <Github className='w-5 h-5' />
                         </SocialLink>
-                        <SocialLink href="#">
+                        <SocialLink href="https://www.linkedin.com/in/tanish-tanmay-sahoo/">
                             <Linkedin className='w-5 h-5' />
                         </SocialLink>
                     </div>
@@ -94,5 +103,6 @@ const Footer = () => {
     </footer>
   )
 }
+
 
 export default Footer

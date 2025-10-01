@@ -56,11 +56,11 @@ export const FAQS = [
     question: "Is my data secure?",
     answer: "Yes, we take data security seriously and use industry-standard measures to protect your information."
   }, {
-    question: "Can I customize the invoice templates?",
-    answer: "Yes, we offer a variety of templates that you can customize to fit your brand."
+    question: "Can I add items later to an invoice?",
+    answer: "Yes, you can add other items and edit your your invoice later."
   }, {
     question: "How do I send payment reminders?",
-    answer: "You can set up automatic reminders or send them manually through the app."  
+    answer: "You can get an AI-generated reminder. Simply just copy that and send to the client."  
   }    
 ]
 
