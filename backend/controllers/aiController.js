@@ -132,8 +132,8 @@ const getDashboardSummary = async (req,res) => {
             - Total number of invoices : ${totalInvoices}
             - Total paid invoices : ${paidInvoices.length}
             - Total unpaid/pending invoices : ${unpaidInvoices.length}
-            - Total revenue from paid invoices : ${totalRevenue.toFixed(2)}
-            - Total outstanding amount from unpaid/pending invoices : ${totalOutstanding.toFixed(2)}
+            - Total revenue from paid invoices : ₹${totalRevenue.toFixed(2)}
+            - Total outstanding amount from unpaid/pending invoices : ₹${totalOutstanding.toFixed(2)}
             - Recent invoices(last 5) : ${invoices.slice(0,5).map(inv => `Invoice #${inv.invoiceNumber} for ${inv.total.toFixed(2)} with status ${inv.status}`).join(',')} 
             
         `;

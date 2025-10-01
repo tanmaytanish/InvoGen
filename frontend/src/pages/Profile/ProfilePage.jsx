@@ -6,6 +6,7 @@ import {API_PATHS} from "../../utils/apiPaths";
 import toast from "react-hot-toast";
 import InputField from "../../components/ui/InputField";
 import TextareaField from "../../components/ui/TextAreaField";
+import { useNavigate } from "react-router-dom";
 
 const ProfilePage = () => {
     const {user, loading, updateUser} = useAuth();
@@ -16,6 +17,7 @@ const ProfilePage = () => {
         address: "",
         phone: "",
     });
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (user) {
@@ -41,6 +43,7 @@ const ProfilePage = () => {
         const response = await axiosInstance.put(API_PATHS.AUTH.UPDATE_PROFILE,formData)
         updateUser(response.data)
         toast.success("Profile Updated Successfully")
+        navigate('/dashboard')
       } catch (error) {
         toast.error("Failed to update profile")
         console.error(error)

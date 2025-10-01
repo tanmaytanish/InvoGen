@@ -5,6 +5,8 @@ import {useAuth} from "../../context/AuthContext";
 import axiosInstance from "../../utils/axiosInstance";
 import {useNavigate} from "react-router-dom";
 import {validateEmail, validatePassword} from "../../utils/helper";
+import toast from "react-hot-toast";
+
 
 const Login = () => {
     const {login} = useAuth();
@@ -104,6 +106,7 @@ const Login = () => {
 
                 if (token) {
                     setSuccess("Login Successful");
+                    toast.success("Login Succesful")
                     login(response.data, token);
 
                     // Redirect based on role

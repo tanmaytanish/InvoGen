@@ -5,6 +5,8 @@ import {useAuth} from "../../context/AuthContext";
 import axiosInstance from "../../utils/axiosInstance";
 import {useNavigate} from "react-router-dom";
 import {validateEmail, validatePassword} from "../../utils/helper";
+import toast from "react-hot-toast";
+
 
 const Signup = () => {
     const {login} = useAuth();
@@ -163,6 +165,7 @@ const Signup = () => {
 
           if(response.status === 201){
             setSuccess("Account Created Successfully")
+            toast.success("Account Ceated Successfully")
 
 
             // Reset Form
