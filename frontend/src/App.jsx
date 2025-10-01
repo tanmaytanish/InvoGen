@@ -1,7 +1,7 @@
 import {BrowserRouter as Router, Routes, Route, Navigate} from "react-router-dom";
 import {Toaster} from "react-hot-toast";
 import LandingPage from "./pages/LandingPage/LandingPage";
-import SignUp from "./pages/Auth/SignUp";
+import SignUp from "./pages/Auth/Signup";
 import Login from "./pages/Auth/Login";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import AllInvoices from "./pages/Invoices/AllInvoices";
