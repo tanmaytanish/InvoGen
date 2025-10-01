@@ -30,21 +30,21 @@ export const FEATURES = [
 export const TESTIMONIALS = [
   {
     quote: "This app saved me hours of work. I can now create and send invoices in minutes!",
-    author: "Jane Doe",
+    author: "Debesh Behera",
     title: "Freelance Designer",
-    avatar: "https://placehold.co/100x100/000000/ffffff?text=JD"
+    avatar: "https://placehold.co/100x100/000000/ffffff?text=DB"
   },
   {
     quote: "The best invoicing app I have ever used. Simple, intuitive, and powerful.",
-    author: "John Smith",
+    author: "Lokesh Reddy",
     title: "Small Business Owner",
-    avatar: "https://placehold.co/100x100/000000/ffffff?text=JS"
+    avatar: "https://placehold.co/100x100/000000/ffffff?text=LR"
   },
   {
     quote: "I love the dashboard and reporting features. It helps me keep track of my finances easily.",
-    author: "Peter Jones",
+    author: "Ashutosh Sahoo",
     title: "Consultant",
-    avatar: "https://placehold.co/100x100/000000/ffffff?text=PJ"
+    avatar: "https://placehold.co/100x100/000000/ffffff?text=AS"
   }
 ];
 
