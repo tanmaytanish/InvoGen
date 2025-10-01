@@ -318,7 +318,7 @@ const CreateInvoice = ({existingInvoice, onSave}) => {
                                         />
                                     </td>
                                     <td className="px-2 sm:px-6 py-4 text-sm text-slate-500">
-                                        $
+                                        ₹
                                         {(
                                             (item.quantity || 0) *
                                             (item.unitPrice || 0) *
@@ -365,15 +365,15 @@ const CreateInvoice = ({existingInvoice, onSave}) => {
                     <div className="space-y-4">
                         <div className="flex justify-between text-sm text-slate-600">
                             <p>Subtotal:</p>
-                            <p>${subtotal.toFixed(2)}</p>
+                            <p>₹{subtotal.toFixed(2)}</p>
                         </div>
                         <div className="flex justify-between text-sm text-slate-600">
                             <p>Tax:</p>
-                            <p>${taxTotal.toFixed(2)}</p>
+                            <p>₹{taxTotal.toFixed(2)}</p>
                         </div>
                         <div className="flex justify-between text-lg font-semibold text-slate-900 border-t border-slate-200 pt-4 mt-4">
                             <p>Total:</p>
-                            <p>${total.toFixed(2)}</p>
+                            <p>₹{total.toFixed(2)}</p>
                         </div>
                     </div>
                 </div>

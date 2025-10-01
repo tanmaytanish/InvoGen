@@ -220,10 +220,10 @@ const InvoiceDetail = () => {
                                             {item.quantity}
                                         </td>
                                         <td className="px-4 sm:px-6 py-4 text-sm text-right font-medium text-slate-600">
-                                            ${item.unitPrice.toFixed(2)}
+                                            ₹{item.unitPrice.toFixed(2)}
                                         </td>
                                         <td className="px-4 sm:px-6 py-4 text-sm text-right font-medium text-slate-900">
-                                            ${item.total.toFixed(2)}
+                                            ₹{item.total.toFixed(2)}
                                         </td>
                                     </tr>
                                 ))}
@@ -235,17 +235,17 @@ const InvoiceDetail = () => {
                         <div className="w-full max-w-sm space-y-3">
                             <div className="flex justify-between text-sm text-slate-600">
                                 <span>Subtotal</span>
-                                <span>${invoice.subtotal.toFixed(2)}</span>
+                                <span>₹{invoice.subtotal.toFixed(2)}</span>
                             </div>
 
                             <div className="flex justify-between text-sm text-slate-600">
                                 <span>Tax</span>
-                                <span>${invoice.taxTotal.toFixed(2)}</span>
+                                <span>₹{invoice.taxTotal.toFixed(2)}</span>
                             </div>
 
                             <div className="flex justify-between font-semibold text-lg text-slate-900 pt-3 mt-3">
       <span>Total</span>
-      <span>${invoice.total.toFixed(2)}</span>
+      <span>₹{invoice.total.toFixed(2)}</span>
     </div>
                         </div>
                     </div>
