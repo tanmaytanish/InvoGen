@@ -10,6 +10,7 @@ InvoGen is an **AI-powered invoice generation platform** built with the **MERN s
 ## ✨ Features  
 
 - **🤖 AI Invoice Creation** – Paste any text, email, or receipt, and let Gemini AI generate a professional invoice instantly.  
+
 - **📊 AI-Powered Dashboard** – Gain actionable financial insights through AI-generated analytics presented on the dashboard.  
 - **📧 Smart Reminders** – Automatically send polite and effective payment reminder emails for overdue invoices.  
 - **📂 Easy Invoice Management** – Centralized management of all invoices with payment tracking and reminder functionalities.  
@@ -19,7 +20,8 @@ InvoGen is an **AI-powered invoice generation platform** built with the **MERN s
 
 ## 🛠️ Tech Stack  
 
-- **Frontend:** React.js, Tailwind CSS / Custom CSS  
+- **Frontend:** React.js, Tailwind CSS / Custom CSS 
+
 - **Backend:** Node.js, Express.js  
 - **AI Integration:** Google Gemini API  
 - **Database:** MongoDB Atlas  
@@ -30,39 +32,43 @@ InvoGen is an **AI-powered invoice generation platform** built with the **MERN s
 
 ## ⚙️ Installation & Setup  
 
+
 1. **Clone the Repository**  
+```
 git clone https://github.com/your-username/InvoGen.git
 cd InvoGen
+```
 
-text
+
 
 2. **Install Dependencies**  
+```
 npm install
+```
 
-text
 
 3. **Set up Environment Variables**  
 Create a `.env` file in the root directory with the following content:  
+```
 PORT=5000
 MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_jwt_secret
 GEMINI_API_KEY=your_gemini_api_key
+```
 
-text
 
 4. **Run the Application**  
 Start backend server
-npm run server
+```
+npm run dev
+```
 
 Start frontend client
-npm run client
+```
+npm run dev
+```
 
-text
 
-5. **Open the app in your browser:**  
-http://localhost:3000
-
-text
 
 ---
 
@@ -86,24 +92,19 @@ Explore the AI-powered dashboard featuring analytics and financial business insi
 - **Smart Reminders**  
 Enable automated reminders for overdue invoices, sending polite payment request emails to clients.  
 
----
 
-## 📸 Screenshots  
 
-- AI Invoice Creation  
-- Dashboard with Analytics  
-- Smart Reminders Interface  
-- Invoice Management  
-- PDF Export Preview  
+
+
 
 ---
 
 ## 🔮 Future Enhancements  
 
 - Multi-language invoice support  
+
 - Integration with payment gateways (Stripe, Razorpay, PayPal)  
 - Role-based access control (Admin, Accountant, Client)  
-- Mobile app version  
 - AI-powered expense categorization  
 
 ---
@@ -112,4 +113,4 @@ Enable automated reminders for overdue invoices, sending polite payment request 
 
 Developed by Tanish Tanmay Sahoo 🚀  
 
-[LinkedIn Profile](#) | [Portfolio](#)
+[LinkedIn Profile](https://www.linkedin.com/in/tanish-tanmay-sahoo/) | [Portfolio](https://tanishtanmay.netlify.app/)
